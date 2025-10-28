@@ -1,12 +1,96 @@
-# React + Vite
+# GCH Backend API (Node.js)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Node.js/Express.js backend API for GCH Solar and Waste Water Management system.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Authentication**: JWT-based user authentication
+- **Form Submissions**: Handle contact forms and inquiries
+- **Database**: PostgreSQL with Prisma ORM
+- **Deployment**: Vercel-ready serverless functions
 
-## Expanding the ESLint configuration
+## 📁 Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+gch-api-nodejs/
+├── api/
+│   └── index.js          # Vercel serverless entry point
+├── middleware/
+│   ├── auth.js           # JWT authentication middleware
+│   └── errorHandler.js   # Error handling middleware
+├── routes/
+│   ├── auth.js           # Authentication routes
+│   └── forms.js          # Form submission routes
+├── prisma/
+│   └── schema.prisma     # Database schema
+├── package.json          # Dependencies and scripts
+├── vercel.json          # Vercel deployment config
+└── env.example          # Environment variables template
+```
+
+## 🛠️ Setup
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Set up environment variables:**
+   ```bash
+   cp env.example .env
+   # Edit .env with your database URL and JWT secret
+   ```
+
+3. **Set up database:**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
+
+4. **Run locally:**
+   ```bash
+   npm run dev
+   ```
+
+## 🌐 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+
+### Forms
+- `POST /api/forms/submit` - Submit contact form
+- `GET /api/forms` - Get all form submissions (admin)
+- `GET /api/forms/my` - Get user's form submissions
+
+## 🚀 Deployment
+
+This backend is configured for Vercel deployment:
+
+1. **Connect to Vercel:**
+   - Import from GitHub repository
+   - Set environment variables in Vercel dashboard
+   - Deploy automatically
+
+2. **Database Setup:**
+   - Use Vercel Postgres or external PostgreSQL
+   - Run `npx prisma db push` after deployment
+
+## 📝 Environment Variables
+
+```env
+DATABASE_URL=postgresql://username:password@host:port/database
+JWT_SECRET=your-super-secret-jwt-key
+NODE_ENV=production
+```
+
+## 🔧 Development
+
+- **Local development:** `npm run dev`
+- **Testing:** `npm test`
+- **Database management:** `npx prisma studio`
+
+## 📚 Documentation
+
+For detailed API documentation and integration guides, see the individual README files in each folder.
