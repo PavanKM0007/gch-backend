@@ -1,0 +1,48 @@
+{
+  "name": "gch-api-nodejs",
+  "version": "1.0.0",
+  "description": "GCH Solar and Waste Water Management Backend API - Node.js/Express",
+  "main": "api/index.js",
+  "scripts": {
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
+    "build": "echo 'No build step required'",
+    "vercel-build": "echo 'No build step required'",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "test": "node test-backend.js"
+  },
+  "keywords": [
+    "gch",
+    "solar",
+    "waste-water",
+    "api",
+    "backend",
+    "nodejs",
+    "express",
+    "prisma"
+  ],
+  "author": "GCH Team",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^5.7.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "supertest": "^7.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+

@@ -1,0 +1,46 @@
+// Prisma schema for GCH Backend API
+// Converted from FastAPI SQLAlchemy models
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
+  fullName         String   @map("full_name")
+  phone            String?
+  hashedPassword   String   @map("hashed_password")
+  isActive         Boolean  @default(true) @map("is_active")
+  isAdmin          Boolean  @default(false) @map("is_admin")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  
+  // Relations
+  formSubmissions FormSubmission[]
+  
+  @@map("users")
+}
+
+model FormSubmission {
+  id             Int      @id @default(autoincrement())
+  formType       String   @map("form_type")
+  name           String
+  email          String
+  phone          String?
+  message        String?
+  additionalData Json?    @map("additional_data")
+  submittedAt    DateTime @default(now()) @map("submitted_at")
+  
+  // Relations
+  userId         Int?     @map("user_id")
+  user           User?    @relation(fields: [userId], references: [id])
+  
+  @@map("form_submissions")
+}
+
