@@ -1,96 +1,47 @@
-# GCH Backend API (Node.js)
+# GCH Backend API - Minimal Version
 
-A Node.js/Express.js backend API for GCH Solar and Waste Water Management system.
+This is a minimal version of the GCH backend API for troubleshooting deployment issues.
 
-## 🚀 Features
+## 🚀 Quick Test Endpoints
 
-- **Authentication**: JWT-based user authentication
-- **Form Submissions**: Handle contact forms and inquiries
-- **Database**: PostgreSQL with Prisma ORM
-- **Deployment**: Vercel-ready serverless functions
+- `GET /` - Basic API info
+- `GET /health` - Health check
+- `GET /test` - Test endpoint
+- `POST /api/auth/test` - Auth test (no database)
+- `POST /api/forms/test` - Forms test (no database)
 
-## 📁 Project Structure
+## 🔧 Troubleshooting Steps
 
-```
-gch-api-nodejs/
-├── api/
-│   └── index.js          # Vercel serverless entry point
-├── middleware/
-│   ├── auth.js           # JWT authentication middleware
-│   └── errorHandler.js   # Error handling middleware
-├── routes/
-│   ├── auth.js           # Authentication routes
-│   └── forms.js          # Form submission routes
-├── prisma/
-│   └── schema.prisma     # Database schema
-├── package.json          # Dependencies and scripts
-├── vercel.json          # Vercel deployment config
-└── env.example          # Environment variables template
-```
+1. **Check if API is running**: Visit `/` endpoint
+2. **Test basic functionality**: Try `/test` endpoint
+3. **Test POST requests**: Try `/api/auth/test` with JSON body
+4. **Check Vercel logs**: Look for deployment errors
+5. **Verify environment**: Check if Node.js version is compatible
 
-## 🛠️ Setup
+## 📝 Test Commands
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+```bash
+# Test GET endpoint
+curl https://your-vercel-url.vercel.app/
 
-2. **Set up environment variables:**
-   ```bash
-   cp env.example .env
-   # Edit .env with your database URL and JWT secret
-   ```
-
-3. **Set up database:**
-   ```bash
-   npx prisma generate
-   npx prisma db push
-   ```
-
-4. **Run locally:**
-   ```bash
-   npm run dev
-   ```
-
-## 🌐 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
-
-### Forms
-- `POST /api/forms/submit` - Submit contact form
-- `GET /api/forms` - Get all form submissions (admin)
-- `GET /api/forms/my` - Get user's form submissions
-
-## 🚀 Deployment
-
-This backend is configured for Vercel deployment:
-
-1. **Connect to Vercel:**
-   - Import from GitHub repository
-   - Set environment variables in Vercel dashboard
-   - Deploy automatically
-
-2. **Database Setup:**
-   - Use Vercel Postgres or external PostgreSQL
-   - Run `npx prisma db push` after deployment
-
-## 📝 Environment Variables
-
-```env
-DATABASE_URL=postgresql://username:password@host:port/database
-JWT_SECRET=your-super-secret-jwt-key
-NODE_ENV=production
+# Test POST endpoint
+curl -X POST https://your-vercel-url.vercel.app/api/auth/test \
+  -H "Content-Type: application/json" \
+  -d '{"test": "data"}'
 ```
 
-## 🔧 Development
+## 🐛 Common Issues
 
-- **Local development:** `npm run dev`
-- **Testing:** `npm test`
-- **Database management:** `npx prisma studio`
+- **404 errors**: Check Vercel routing configuration
+- **500 errors**: Check Node.js version compatibility
+- **CORS errors**: Verify origin settings
+- **Timeout errors**: Check function duration limits
 
-## 📚 Documentation
+## 📋 Next Steps
 
-For detailed API documentation and integration guides, see the individual README files in each folder.
+Once basic endpoints work:
+1. Add database connection
+2. Add authentication
+3. Add form submission
+4. Add error handling
+5. Add validation
