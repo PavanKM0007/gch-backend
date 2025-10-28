@@ -44,7 +44,12 @@ app.get('/', (req, res) => {
   res.json({ 
     message: 'GCH Backend API is running!',
     version: '1.0.0',
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      auth: '/api/auth',
+      forms: '/api/forms',
+      health: '/health'
+    }
   });
 });
 
@@ -57,8 +62,8 @@ app.get('/health', (req, res) => {
 });
 
 // API routes
-app.use('/auth', authRoutes);
-app.use('/forms', formRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/forms', formRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
